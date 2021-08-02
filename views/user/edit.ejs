@@ -1,0 +1,52 @@
+<%- include('../template/header.ejs') %>
+  <section class="content">
+    <div class="container-fluid">
+      <div class="row">
+        <!-- left column -->
+        <div class="col-md-12">
+          <!-- jquery validation -->
+          <div class="card card-primary">
+            <div class="card-header">
+              <h3 class="card-title">Edit data user</h3>
+            </div>
+            <!-- /.card-header -->
+            <!-- form start -->
+            <form class="form-horizontal" action="/user/edit" method="POST">
+              <input type="hidden" name="id" value="<%= user.id_user %>">
+              <div class="card-body">
+                <div class="form-group row">
+                  <label for="username" class="col-sm-2 col-form-label">Username</label>
+                  <div class="col-sm-10">
+                    <input type="text" class="form-control" name="username" id="username" placeholder="Username"
+                      required value="<%= user.username %>">
+                  </div>
+                </div>
+                <div class="form-group row">
+                  <label for="password" class="col-sm-2 col-form-label">Password</label>
+                  <div class="col-sm-10">
+                    <input type="text" class="form-control" name="password" id="password" placeholder="Password"
+                      required value="<%= user.password %>">
+                  </div>
+                </div>
+              </div>
+              <!-- /.card-body -->
+              <div class="card-footer">
+                <a href="/user" class="btn btn-default">Cancel</a>
+                <button type="submit" class="btn btn-primary float-right">Ubah</button>
+              </div>
+              <!-- /.card-footer -->
+            </form>
+          </div>
+          <!-- /.card -->
+        </div>
+        <!--/.col (left) -->
+        <!-- right column -->
+        <div class="col-md-6">
+
+        </div>
+        <!--/.col (right) -->
+      </div>
+      <!-- /.row -->
+    </div><!-- /.container-fluid -->
+  </section>
+  <%- include('../template/footer.ejs') %>

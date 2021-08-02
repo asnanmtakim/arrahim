@@ -1,0 +1,108 @@
+<%- include('../template/header.ejs') %>
+<section class="content">
+  <div class="container-fluid">
+    <div class="row">
+      <!-- left column -->
+      <div class="col-md-12">
+        <!-- jquery validation -->
+        <div class="card card-primary">
+          <div class="card-header">
+            <h3 class="card-title">Tambah data jadwal</h3>
+          </div>
+          <!-- /.card-header -->
+          <!-- form start -->
+          <form class="form-horizontal" action="/jadwal/tambah" method="POST">
+            <div class="card-body">
+              <div class="form-group row">
+                <label for="host" class="col-sm-2 col-form-label">Host</label>
+                <div class="col-sm-10">
+                  <select class="form-control" id="host" name="host" required>
+                    <option value='' disabled selected>--Pilih Host--</option>
+                    <% host.forEach(hs => { %>
+                    <option value='<%= hs.id_host %>'><%= hs.nama_host %></option>
+                    <% }) %>
+                  </select>
+                </div>
+              </div>
+              <div class="form-group row">
+                <label for="narasumber" class="col-sm-2 col-form-label">Narasumber</label>
+                <div class="col-sm-10">
+                  <select class="form-control" id="narasumber" name="narasumber" required>
+                    <option value='' disabled selected>--Pilih Narasumber--</option>
+                    <% narasumber.forEach(ns => { %>
+                    <option value='<%= ns.id_narasumber %>'><%= ns.nama %> | <%= ns.no_hp %></option>
+                    <% }) %>
+                  </select>
+                </div>
+              </div>
+              <div class="form-group row">
+                <label for="no_sertif" class="col-sm-2 col-form-label">No Sertif</label>
+                <div class="col-sm-10">
+                  <input type="text" class="form-control" name="no_sertif" id="no_sertif" placeholder="No Sertif" readonly>
+                </div>
+              </div>
+              <div class="form-group row">
+                <label for="waktu_pelaksanaan" class="col-sm-2 col-form-label">Waktu Pelaksanaan</label>
+                <div class="col-sm-10">
+                  <div class="input-group date" id="waktu_pelaksanaan" data-target-input="nearest">
+                    <input type="text" class="form-control datetimepicker-input" name="waktu_pelaksanaan" data-target="#waktu_pelaksanaan" required/>
+                    <div class="input-group-append" data-target="#waktu_pelaksanaan" data-toggle="datetimepicker">
+                      <div class="input-group-text"><i class="fa fa-calendar"></i></div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="form-group row">
+                <label for="tema" class="col-sm-2 col-form-label">Tema</label>
+                <div class="col-sm-10">
+                  <input type="text" class="form-control" name="tema" id="tema" placeholder="Tema" required>
+                </div>
+              </div>
+            </div>
+            <!-- /.card-body -->
+            <div class="card-footer">
+              <a href="/jadwal" class="btn btn-default">Cancel</a>
+              <button type="submit" class="btn btn-success float-right">Simpan</button>
+            </div>
+            <!-- /.card-footer -->
+          </form>
+        </div>
+        <!-- /.card -->
+      </div>
+      <!--/.col (left) -->
+      <!-- right column -->
+      <div class="col-md-6">
+
+      </div>
+      <!--/.col (right) -->
+    </div>
+    <!-- /.row -->
+  </div><!-- /.container-fluid -->
+</section>
+<script>
+  var no_sertif = '<%= sertif.sertif %>';
+  var nonew = "";
+  if(no_sertif == ''){
+     nonew = "P-001/2021";
+  } else{
+    var ns1 = no_sertif.slice(2,5);
+    var no2 = (parseInt(ns1) + 1).toString();
+    if (no2.length = 1) {
+      nonew = "P-00" + no2 + "/2021";
+    } else if(no2.length = 2){
+      nonew = "P-0" + no2 + "/2021";
+    } else{
+      nonew = "P-" + no2 + "/2021";
+    }
+  }
+  var inputno = document.getElementById('no_sertif');
+  inputno.value = nonew;
+</script>
+<%- include('../template/footer.ejs') %>
+<script>
+  $(function () {
+    $('#waktu_pelaksanaan').datetimepicker({
+      format: 'DD/MM/YYYY H:mm'
+    });
+  });
+</script>

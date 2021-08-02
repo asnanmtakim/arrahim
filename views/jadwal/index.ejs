@@ -1,0 +1,127 @@
+<%- include('../template/header.ejs') %>
+<section class="content">
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-12">
+          <div class="card">
+            <div class="card-header">
+              <h3 class="card-title"><strong>Data Jadwal</strong></h3>
+              <div class="float-right">
+                <a href="/jadwal/tambah" class="btn btn-sm btn-primary"><i class="fas fa-user-plus"></i>&nbsp;&nbsp;Tambah Jadwal</a>
+              </div>
+            </div>
+            <!-- /.card-header -->
+            <div class="card-body table-responsive">
+              <table id="example2" class="table table-bordered table-hover">
+                <thead>
+                <tr>
+                  <th>No</th>
+                  <th>Nama host</th>
+                  <th>Nama Narasumber</th>
+                  <th>No Sertif</th>
+                  <th>Waktu Pelaksanaan</th>
+                  <th>Tema</th>
+                  <th>Status</th>
+                  <th>Aksi</th>
+                </tr>
+                </thead>
+                <tbody>
+                    <% listjadwal.forEach(function(lj) { %>
+                    <tr>
+                        <td id="no"></td>
+                        <td id="nama"><%= lj.nama_host %></td>
+                        <td><%= lj.nama %> (<%= lj.institusi %>)</td>
+                        <td><%= lj.no_sertif %></td>
+                        <td><%= lj.waktu_pelaksanaan %></td>
+                        <td><a href="javascript:tandai('<%= lj.id_jadwal %>');"><%= lj.tema %></a></td>
+                        <td>
+                          <% if (lj.status==0) { %>
+                          <span class="badge bg-danger">Tertunda</span>
+                          <% } else{ %>
+                          <span class="badge bg-success">Selesai</span>
+                          <% } %>
+                        </td>
+                        <td>
+                          <% if (lj.status!=0) { %>
+                          <a href="/jadwal/sertif/<%= lj.id_jadwal %>" class="btn btn-sm btn-info" target="_blank"><i class="fas fa-print"></i></a>
+                          <% } %>
+                          <a href="/jadwal/edit/<%= lj.id_jadwal %>" class="btn btn-sm btn-warning"><i class="fas fa-user-edit"></i></a>
+                          <a href="javascript:hapus('<%= lj.id_jadwal %>');" class="btn btn-sm btn-danger"><i class="fas fa-user-minus"></i></a>
+                        </td>
+                    </tr>
+                    <% }); %>
+                </tbody>
+              </table>
+            </div>
+            <!-- /.card-body -->
+          </div>
+          <!-- /.card -->
+        </div>
+        <!-- /.col -->
+      </div>
+      <!-- /.row -->
+    </div>
+    <!-- /.container-fluid -->
+  </section>
+<%- include('../template/footer.ejs') %>
+
+<% if (messages.error) { %>
+  <script>
+  $(document).ready(function () {
+    toastr.error('<%= messages.error %>')
+  });
+  </script>
+<% } %>
+<% if (messages.success) { %>
+  <script>
+  $(document).ready(function () {
+    toastr.success('<%= messages.success %>')
+  });
+  </script>
+<% } %>
+
+<script>
+  function hapus(id) {
+    Swal.fire({
+      title: 'Yakin hapus data?',
+      text: "Data yang sudah dihapus tidak bisa dikembalikan!",
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Ya, hapus!',
+      cancelButtonText: 'Batal'
+    }).then((result) => {
+      if (result.isConfirmed) {
+        Swal.fire(
+          'Terhapus!',
+          'Data berhasil dihapus.',
+          'success'
+        ).then((result)=>{
+          location.href = "jadwal/hapus/" + id;
+        });
+      }
+    });
+  }
+  function tandai(id) {
+    Swal.fire({
+      title: 'Proses jadwal podcast berikut?',
+      icon: 'info',
+      showDenyButton: true,
+      showCancelButton: true,
+      confirmButtonText: `Selesai`,
+      denyButtonText: `Belum selesai`,
+    }).then((result) => {
+      /* Read more about isConfirmed, isDenied below */
+      if (result.isConfirmed) {
+        Swal.fire('Selesai!', 'Jadwal podcast tersebut telah selesai terlaksana', 'success').then((result) => {
+          location.href = "jadwal/proses1/" + id
+          });
+      } else if (result.isDenied) {
+        Swal.fire('Tertunda', 'Jadwal podcast tersebut belum terlaksana', 'error').then((result) => {
+          location.href = "jadwal/proses0/" + id
+        });
+      }
+    })
+  }
+</script>

@@ -1,0 +1,56 @@
+<%- include('../template/header.ejs') %>
+<section class="content">
+  <div class="container-fluid">
+    <div class="row">
+      <!-- left column -->
+      <div class="col-md-12">
+        <!-- jquery validation -->
+        <div class="card card-primary">
+          <div class="card-header">
+            <h3 class="card-title">Edit data host</h3>
+          </div>
+          <!-- /.card-header -->
+          <!-- form start -->
+          <form class="form-horizontal" action="/host/edit" method="POST">
+            <input type="hidden" name="id" value="<%= host.id_host %>">
+            <div class="card-body">
+              <div class="form-group row">
+                <label for="nama" class="col-sm-2 col-form-label">Nama</label>
+                <div class="col-sm-10">
+                  <input type="text" class="form-control" name="nama" id="nama" placeholder="Nama" value="<%= host.nama_host %>" required>
+                </div>
+              </div>
+              <div class="form-group row">
+                <label for="alamat" class="col-sm-2 col-form-label">Alamat</label>
+                <div class="col-sm-10">
+                  <textarea class="form-control" name="alamat" id="alamat" rows="3" placeholder="Alamat" required><%= host.alamat_host %></textarea>
+                </div>
+              </div>
+              <div class="form-group row">
+                <label for="no_hp" class="col-sm-2 col-form-label">Ho HP</label>
+                <div class="col-sm-10">
+                  <input type="number" class="form-control" name="no_hp" id="no_hp" placeholder="No HP" value="<%= host.no_hp_host %>" required>
+                </div>
+              </div>
+            </div>
+            <!-- /.card-body -->
+            <div class="card-footer">
+              <a href="/host" class="btn btn-default">Cancel</a>
+              <button type="submit" class="btn btn-primary float-right">Ubah</button>
+            </div>
+            <!-- /.card-footer -->
+          </form>
+        </div>
+        <!-- /.card -->
+      </div>
+      <!--/.col (left) -->
+      <!-- right column -->
+      <div class="col-md-6">
+
+      </div>
+      <!--/.col (right) -->
+    </div>
+    <!-- /.row -->
+  </div><!-- /.container-fluid -->
+</section>
+<%- include('../template/footer.ejs') %>

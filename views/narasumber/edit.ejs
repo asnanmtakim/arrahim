@@ -1,0 +1,220 @@
+<%- include('../template/header.ejs') %>
+  <section class="content">
+    <div class="container-fluid">
+      <div class="row">
+        <!-- left column -->
+        <div class="col-md-12">
+          <!-- jquery validation -->
+          <div class="card card-primary">
+            <div class="card-header">
+              <h3 class="card-title">Edit data narasumber</h3>
+            </div>
+            <!-- /.card-header -->
+            <!-- form start -->
+            <form action="/narasumber/edit" method="POST" enctype="multipart/form-data">
+              <input type="hidden" name="id" value="<%= narasumber.id_narasumber %>">
+              <div class="card-body">
+                <div class="row">
+                  <div class="col-12">
+                    <div class="form-group row">
+                      <label for="nama" class="col-sm-2 col-form-label">Nama</label>
+                      <div class="col-sm-10">
+                        <input type="text" class="form-control" name="nama" id="nama" placeholder="Nama Narasumber" required value="<%= narasumber.nama %>">
+                      </div>
+                    </div>
+                    <div class="form-group row">
+                      <label for="institusi" class="col-sm-2 col-form-label">Institusi</label>
+                      <div class="col-sm-10">
+                        <input type="text" class="form-control" name="institusi" id="institusi" placeholder="Institusi" required value="<%= narasumber.institusi %>">
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-6">
+                    <div class="form-group row">
+                      <label for="tempat_lahir" class="col-sm-4 col-form-label">Tempat lahir</label>
+                      <div class="col-sm-8">
+                        <input type="text" class="form-control" name="tempat_lahir" id="tempat_lahir" placeholder="Tempat lahir" value="<%= narasumber.tempat_lahir %>" required>
+                      </div>
+                    </div>
+                    <div class="form-group row">
+                      <label for="jk" class="col-sm-4 col-form-label">Jenis Kelamin</label>
+                      <div class="col-sm-8">
+                        <select class="form-control" id="jk" name="jk" required>
+                          <option value='' disabled selected>--Pilih Jenis Kelamin--</option>
+                          <option value='Laki-laki' <% if (narasumber.jenis_kelamin=='Laki-laki') { %> selected <% } %>>Laki-laki</option>
+                          <option value='Perempuan' <% if (narasumber.jenis_kelamin=='Perempuan') { %> selected <% } %>>Perempuan</option>
+                        </select>
+                      </div>
+                    </div>
+                    <div class="form-group row">
+                      <label for="kewarganegaraan" class="col-sm-4 col-form-label">Kewarganegaraan</label>
+                      <div class="col-sm-8">
+                        <input type="text" class="form-control" name="kewarganegaraan" id="kewarganegaraan"
+                          placeholder="Kewarganegaraan" value="<%= narasumber.kewarganegaraan %>" required>
+                      </div>
+                    </div>
+                    <div class="form-group row">
+                      <label for="tinggi_badan" class="col-sm-4 col-form-label">Tinggi badan(cm)</label>
+                      <div class="col-sm-8">
+                        <input type="number" class="form-control" name="tinggi_badan" id="tinggi_badan"
+                          placeholder="Tinggi badan" value="<%= narasumber.tinggi_badan %>" required>
+                      </div>
+                    </div>
+                    <div class="form-group row">
+                      <label for="no_hp" class="col-sm-4 col-form-label">No HP</label>
+                      <div class="col-sm-8">
+                        <input type="number" class="form-control" name="no_hp" id="no_hp" placeholder="No HP" value="<%= narasumber.no_hp %>" required>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-6">
+                    <div class="form-group row">
+                      <label for="tanggal_lahir" class="col-sm-4 col-form-label">Tanggal lahir</label>
+                      <div class="col-sm-8">
+                        <div class="input-group date" id="tanggal_lahir" data-target-input="nearest">
+                          <input type="text" class="form-control datetimepicker-input" name="tanggal_lahir" data-target="#tanggal_lahir"
+                            required value="<%= narasumber.tanggal_lahir %>" />
+                          <div class="input-group-append" data-target="#tanggal_lahir" data-toggle="datetimepicker">
+                            <div class="input-group-text"><i class="fa fa-calendar"></i></div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="form-group row">
+                      <label for="agama" class="col-sm-4 col-form-label">Agama</label>
+                      <div class="col-sm-8">
+                        <select class="form-control" id="agama" name="agama" required>
+                          <option value='' disabled selected>--Pilih Agama--</option>
+                          <option value='Islam' <% if (narasumber.agama=='Islam') { %> selected <% } %>>Islam</option>
+                          <option value='Kristen' <% if (narasumber.agama=='Kristen') { %> selected <% } %>>Kristen</option>
+                          <option value='Katolik' <% if (narasumber.agama=='Katolik') { %> selected <% } %>>Katolik</option>
+                          <option value='Hindu' <% if (narasumber.agama=='Hindu') { %> selected <% } %>>Hindu</option>
+                          <option value='Buddha' <% if (narasumber.agama=='Buddha') { %> selected <% } %>>Buddha</option>
+                          <option value='Konghucu' <% if (narasumber.agama=='Konghucu') { %> selected <% } %>>Konghucu</option>
+                        </select>
+                      </div>
+                    </div>
+                    <div class="form-group row">
+                      <label for="status" class="col-sm-4 col-form-label">Status Perkawinan</label>
+                      <div class="col-sm-8">
+                        <select class="form-control" id="status" name="status" required>
+                          <option value='' disabled selected>--Pilih Status Perkawinan--</option>
+                          <option value='Kawin' <% if (narasumber.status_perkawinan=='Kawin') { %> selected <% } %>>Kawin</option>
+                          <option value='Belum Kawin' <% if (narasumber.status_perkawinan=='Belum Kawin') { %> selected <% } %>>Belum Kawin</option>
+                        </select>
+                      </div>
+                    </div>
+                    <div class="form-group row">
+                      <label for="berat_badan" class="col-sm-4 col-form-label">Berat badan(kg)</label>
+                      <div class="col-sm-8">
+                        <input type="number" class="form-control" name="berat_badan" id="berat_badan" placeholder="Berat badan" value="<%= narasumber.berat_badan %>" required>
+                      </div>
+                    </div>
+                    <div class="form-group row">
+                      <label for="email" class="col-sm-4 col-form-label">Email</label>
+                      <div class="col-sm-8">
+                        <input type="email" class="form-control" name="email" id="email" placeholder="Email" value="<%= narasumber.email %>" required>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-12">
+                    <div class="form-group row">
+                      <label for="alamat" class="col-sm-2 col-form-label">Alamat</label>
+                      <div class="col-sm-10">
+                        <textarea class="form-control" name="alamat" id="alamat" rows="2" placeholder="Alamat" required><%= narasumber.alamat_lengkap %></textarea>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-6">
+                    <div class="form-group row">
+                      <label for="SD" class="col-sm-4 col-form-label">SD</label>
+                      <div class="col-sm-8">
+                        <input type="text" class="form-control" name="SD" id="SD" placeholder="SD" value="<%= narasumber.SD %>" required>
+                      </div>
+                    </div>
+                    <div class="form-group row">
+                      <label for="SMA" class="col-sm-4 col-form-label">SMA</label>
+                      <div class="col-sm-8">
+                        <input type="text" class="form-control" name="SMA" id="SMA" placeholder="SMA" value="<%= narasumber.SMA %>" required>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-6">
+                    <div class="form-group row">
+                      <label for="SMP" class="col-sm-4 col-form-label">SMP</label>
+                      <div class="col-sm-8">
+                        <input type="text" class="form-control" name="SMP" id="SMP" placeholder="SMP" value="<%= narasumber.SMP %>" required>
+                      </div>
+                    </div>
+                    <div class="form-group row">
+                      <label for="perguruan_tinggi" class="col-sm-4 col-form-label">Perguruan tinggi</label>
+                      <div class="col-sm-8">
+                        <input type="text" class="form-control" name="perguruan_tinggi" id="perguruan_tinggi" placeholder="Perguruan tinggi" value="<%= narasumber.perguruan_tinggi %>" required>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-12">
+                    <div class="form-group row">
+                      <label for="keahlian" class="col-sm-2 col-form-label">Keahlian</label>
+                      <div class="col-sm-10">
+                        <textarea class="form-control" name="keahlian" id="keahlian" rows="4" placeholder="Keahlian" required><%= narasumber.keahlian %> </textarea>
+                      </div>
+                    </div>
+                    <div class="form-group row">
+                      <label for="organisasi" class="col-sm-2 col-form-label">Organisasi</label>
+                      <div class="col-sm-10">
+                        <textarea class="form-control" name="organisasi" id="organisasi" rows="4" placeholder="Organisasi" required><%= narasumber.organisasi %></textarea>
+                      </div>
+                    </div>
+                    <div class="form-group row">
+                      <label for="foto" class="col-sm-2 col-form-label">Foto</label>
+                      <div class="col-sm-10">
+                        <div class="custom-file">
+                          <input type="file" class="custom-file-input" name="foto" id="foto">
+                          <label class="custom-file-label" for="foto">Choose file</label>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <!-- /.card-body -->
+              <div class="card-footer">
+                <a href="/narasumber" class="btn btn-default">Cancel</a>
+                <button type="submit" class="btn btn-primary float-right">Ubah</button>
+              </div>
+              <!-- /.card-footer -->
+            </form>
+          </div>
+          <!-- /.card -->
+        </div>
+        <!--/.col (left) -->
+        <!-- right column -->
+        <div class="col-md-6">
+
+        </div>
+        <!--/.col (right) -->
+      </div>
+      <!-- /.row -->
+    </div><!-- /.container-fluid -->
+  </section>
+<%- include('../template/footer.ejs') %>
+  <script>
+    $(function () {
+      bsCustomFileInput.init();
+    });
+  </script>
+<% if (messages.error) { %>
+  <script>
+    $(document).ready(function () {
+      toastr.error('<%= messages.error %>')
+    });
+  </script>
+<% } %>
+<script>
+  $(function () {
+    $('#tanggal_lahir').datetimepicker({
+      format: 'DD/MM/YYYY'
+    });
+  });
+</script>

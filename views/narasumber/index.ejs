@@ -1,0 +1,105 @@
+<%- include('../template/header.ejs') %>
+<section class="content">
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-12">
+          <div class="card">
+            <div class="card-header">
+              <h3 class="card-title"><strong>Data Narasumber</strong></h3>
+              <div class="float-right">
+                <a href="/narasumber/tambah" class="btn btn-sm btn-primary"><i class="fas fa-user-plus"></i>&nbsp;&nbsp;Tambah Narasumber</a>
+              </div>
+            </div>
+            <!-- /.card-header -->
+            <div class="card-body table-responsive">
+              <table id="example2" class="table table-bordered table-hover">
+                <thead>
+                <tr>
+                  <th>No</th>
+                  <th>Nama</th>
+                  <th>Institusi</th>
+                  <th>JK</th>
+                  <th>Alamat</th>
+                  <th>No HP</th>
+                  <th>Email</th>
+                  <th>Foto</th>
+                  <th>Aksi</th>
+                </tr>
+                </thead>
+                <tbody>
+                    <% listnarasumber.forEach(function(ln) { %>
+                    <tr>
+                        <td id="no"></td>
+                        <td><%= ln.nama %></td>
+                        <td><%= ln.institusi %></td>
+                        <td><%= ln.jenis_kelamin %></td>
+                        <td><%= ln.alamat_lengkap %></td>
+                        <td><%= ln.no_hp %></td>
+                        <td><%= ln.email %></td>
+                        <td>
+                          <a href="../../uploads/<%= ln.foto %>" class="image-link">
+                            <img src="../../uploads/<%= ln.foto %>" alt="" style="width:30px;height:30px">
+                          </a>
+                        </td>
+                        <td>
+                          <a href="/narasumber/cv/<%= ln.id_narasumber %>" title="Cetak CV" target="_blank" class="btn btn-sm btn-info"><i class="far fa-address-card"></i></a>
+                          <a href="/narasumber/edit/<%= ln.id_narasumber %>" title="Edit" class="btn btn-sm btn-warning"><i class="fas fa-user-edit"></i></a>
+                          <a href="javascript:hapus('<%= ln.id_narasumber %>');" title="Hapus" class="btn btn-sm btn-danger"><i class="fas fa-user-minus"></i></a>
+                        </td>
+                    </tr>
+                    <% }); %>
+                </tbody>
+              </table>
+            </div>
+            <!-- /.card-body -->
+          </div>
+          <!-- /.card -->
+        </div>
+        <!-- /.col -->
+      </div>
+      <!-- /.row -->
+    </div>
+    <!-- /.container-fluid -->
+  </section>
+  
+<%- include('../template/footer.ejs') %>
+
+<% if (messages.error) { %>
+  <script>
+  $(document).ready(function () {
+    toastr.error('<%= messages.error %>')
+  });
+  </script>
+<% } %>
+<% if (messages.success) { %>
+  <script>
+  $(document).ready(function () {
+    toastr.success('<%= messages.success %>')
+  });
+  </script>
+<% } %>
+
+<script>
+  function hapus(id) {
+    Swal.fire({
+      title: 'Yakin hapus data?',
+      text: "Data yang sudah dihapus tidak bisa dikembalikan!",
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Ya, hapus!',
+      cancelButtonText: 'Batal'
+    }).then((result) => {
+      if (result.isConfirmed) {
+        Swal.fire(
+          'Terhapus!',
+          'Data berhasil dihapus.',
+          'success'
+        ).then((result)=>{
+          location.href = "narasumber/hapus/" + id;
+        });
+      }
+    });
+  }
+</script>
