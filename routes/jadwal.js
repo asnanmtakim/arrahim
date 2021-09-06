@@ -181,18 +181,18 @@ router.get('/sertif/:id', function (req, res, next) {
                     'Content-disposition': 'inline;filename=jadwal_'+id+'.pdf',})
                     .end(pdfData);
                 }); 
-            doc.image('/home/si/Arrahim/public/dist/img/sertif.jpg', 0, 40, { width: 936 });
+            doc.image('/home/asnanmtakim/Programming/Arrahim/public/dist/img/sertiffix.jpg', 0, 0, { width: 936 });
             doc.font('Helvetica-Bold')
             .fontSize(35)
             .fillColor('white')
-            .text(result[0].nama, 118, 235, {
+            .text(result[0].nama, 118, 230, {
                 width: 700,
                 align: 'center'
             });
             doc.font('Helvetica-Bold')
             .fontSize(25)
             .fillColor('orange')
-            .text(result[0].tema, 118, 350, {
+            .text(result[0].tema, 118, 360, {
                 width: 700,
                 align: 'center'
             });
@@ -213,7 +213,7 @@ router.get('/sertif/:id', function (req, res, next) {
             doc.font('Times-Bold')
             .fontSize(20)
             .fillColor('white')
-            .text(result[0].no_sertif, 118, 440, {
+            .text(result[0].no_sertif, 118, 463, {
                 width: 700,
                 align: 'center'
             });
