@@ -213,8 +213,8 @@ router.get('/cv/:id', function (req, res, next) {
                     'Content-disposition': 'inline;filename=narasumber_'+id+'.pdf',})
                     .end(pdfData);
                 }); 
-            doc.image('/home/asnanmtakim/Programming/Arrahim/public/dist/img/CV.png', 0, 0, { width: 612 });
-            doc.image('/home/asnanmtakim/Programming/Arrahim/public/uploads/'+result[0].foto+'', 525, 245, { width: 60 });
+            doc.image(process.cwd() + '/public/dist/img/CV.png', 0, 0, { width: 612 });
+            doc.image(process.cwd() + '/public/uploads/'+result[0].foto+'', 525, 245, { width: 60 });
             
             doc.font('Helvetica-Bold')
                 .fontSize(30)

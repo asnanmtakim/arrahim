@@ -181,7 +181,7 @@ router.get('/sertif/:id', function (req, res, next) {
                     'Content-disposition': 'inline;filename=jadwal_'+id+'.pdf',})
                     .end(pdfData);
                 }); 
-            doc.image('/home/asnanmtakim/Programming/Arrahim/public/dist/img/sertiffix.jpg', 0, 0, { width: 936 });
+            doc.image(process.cwd() + '/public/dist/img/sertiffix.jpg', 0, 0, { width: 936 });
             doc.font('Helvetica-Bold')
             .fontSize(35)
             .fillColor('white')
